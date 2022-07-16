@@ -38,7 +38,7 @@ function Stats() {
   };
 
   updateStats();
-  setInterval(updateStats, 100000);
+  setInterval(updateStats, 200000);
 
   return (
     <Box sx={{

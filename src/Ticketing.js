@@ -86,9 +86,11 @@ function Ticketing() {
               {errmsg}
             </Typography>
             <Typography sx={{ mt: 2 }}>
-              If you believe you received the error above is a mistake with the
-              system, please bring your ticket to Mr. Gu in G4, or email him at &nbsp 
-              <a href="mailto:rangu@iusd.org">rangu@iusd.org</a>. Thanks!
+              If you believe the error you received above is a mistake with the
+              system, please fill out the help form below.
+              <hr />
+              <a href="https://forms.gle/t9R29o6ZJXDM7NE37" target="_blank" rel="noreferrer">
+              Report an Issue!</a>
             </Typography>
           </Box>
         )}

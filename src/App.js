@@ -6,6 +6,7 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Button
 } from "@mui/material";
 import * as React from "react";
 import {
@@ -14,9 +15,11 @@ import {
   Input,
   DarkMode,
   LightMode,
+  Assignment,
 } from "@mui/icons-material";
 import Ticketing from "./Ticketing";
 import Stats from "./Stats";
+import ReactGA from 'react-ga';
 // import Drawing from "./Drawing";
 
 import carrierDark from "./carrier-darkm.png"
@@ -35,6 +38,9 @@ const darkTheme =  createTheme({
     primary: {
       main: '#eeb114',
     },
+    secondary: {
+      main: '#1452ee',
+    }
   }
 });
 const lightTheme = createTheme({
@@ -46,8 +52,13 @@ const lightTheme = createTheme({
     primary: {
       main: '#eeb114',
     },
+    secondary: {
+      main: '#1452ee',
+    }
   }
 });
+
+ReactGA.initialize("G-65F1XKCTRN");
 
 function App() {
   const [tab, setTab] = React.useState(0);
@@ -107,6 +118,16 @@ function App() {
               label="WINGS Drawing"
             />*/}
           </Tabs>
+
+          <Button
+            href="https://forms.gle/t9R29o6ZJXDM7NE37"
+            target="_blank"
+            rel="noreferrer"
+            variant="variant"
+            color="secondary">
+            <Assignment sx={{marginRight: 1}}/>
+            Feedback
+          </Button>
 
           <IconButton color="inherit" onClick={()=>setDark(!dark)}>
             {dark ? <LightMode /> : <DarkMode />}
