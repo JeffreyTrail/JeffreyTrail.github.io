@@ -21,6 +21,8 @@ function Stats() {
   });
   const [top, setTop] = React.useState("");
   const [errmsg, setErrmsg] = React.useState("");
+  const [beg, setBeg] = React.useState("---");
+  const [end, setEnd] = React.useState("---");
 
   const updateStats = () => {
     try {
@@ -37,8 +39,17 @@ function Stats() {
     }
   };
 
-  updateStats();
-  setInterval(updateStats, 200000);
+  // updateStats();
+  React.useEffect(() => {
+    setInterval(updateStats, 60000);
+
+    fetch("https://wings-carrier.herokuapp.com/dates/current")
+    .then((response) => response.json())
+    .then((data) => {
+      setBeg(data.beg);
+      setEnd(data.end);
+    });
+  }, []);
 
   return (
     <Box sx={{
@@ -46,7 +57,7 @@ function Stats() {
       flexDirection: "column"
     }}>
       <Typography variant="h5" sx={rowStyle}>WINGS Ticket Stats</Typography>
-      <Typography variant="h6">for the week of May 02-06</Typography>
+      <Typography variant="h6">Ticket count for the week from {beg} to {end}</Typography>
       <Typography variant="h6">{errmsg}</Typography>
 
       <TableContainer component={Paper} sx={rowStyle}>

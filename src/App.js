@@ -19,7 +19,8 @@ import {
 } from "@mui/icons-material";
 import Ticketing from "./Ticketing";
 import Stats from "./Stats";
-import ReactGA from 'react-ga';
+import ReactGA from "react-ga4";
+
 // import Drawing from "./Drawing";
 
 import carrierDark from "./carrier-darkm.png"
@@ -58,17 +59,30 @@ const lightTheme = createTheme({
   }
 });
 
-ReactGA.initialize("G-65F1XKCTRN");
-
 function App() {
-  const [tab, setTab] = React.useState(0);
-  const [dark, setDark] = React.useState(useMediaQuery('(prefers-color-scheme: dark)'));
+
+  let localDarkSetting = null;
+  let localTab = null;
+
+  if (typeof(Storage) !== "undefined") {
+    // Getting user settings
+    localDarkSetting = localStorage.getItem("dark")
+    localTab = localStorage.getItem("tab")
+  }
+
+  const browserDarkSetting = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const [tab, setTab] = React.useState((localTab !== null) ? parseInt(localTab) : 0);
+  const [dark, setDark] = React.useState((localDarkSetting !== null) ? localDarkSetting==="true" : browserDarkSetting);
 
   const [scrWidth, setScrWidth] = React.useState(window.innerWidth);
   const updateWidth = () => {
     console.log(window.innerWidth);
     setScrWidth(typeof window !== "undefined" ? window.innerWidth : 0);
   }
+
+  ReactGA.initialize("G-65F1XKCTRN");
+  ReactGA.send("pageview");
 
   React.useEffect(()=>{
     window.addEventListener("resize", updateWidth)
@@ -77,10 +91,23 @@ function App() {
     }
   })
 
+  const handleTabChange = (e,newMode) => {
+    setTab(newMode);
+    if (typeof(Storage) !== "undefined")
+        localStorage.setItem("tab", newMode);
+  }
+
+  const handleDark = (e) => {
+    const newMode = !dark;
+    setDark(newMode);
+    if (typeof(Storage) !== "undefined")
+        localStorage.setItem("dark", newMode);
+  }
+
   return (
     <ThemeProvider theme={dark ? darkTheme : lightTheme}>
       <CssBaseline />
-      <React.Fragment className="App">
+      <React.Fragment>
         <Box
           sx={{
             flexGrow: 1,
@@ -99,7 +126,7 @@ function App() {
 
           <Tabs
             value={tab}
-            onChange={(e,newMode)=>setTab(newMode)}
+            onChange={handleTabChange}
             textColor="secondary"
             indicatorColor="secondary"
             sx={{
@@ -129,7 +156,7 @@ function App() {
             Feedback
           </Button>
 
-          <IconButton color="inherit" onClick={()=>setDark(!dark)}>
+          <IconButton color="inherit" onClick={handleDark}>
             {dark ? <LightMode /> : <DarkMode />}
           </IconButton>
           </Toolbar>

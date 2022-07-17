@@ -115,7 +115,6 @@ function Ticketing() {
             required
             error={submitted && code === ""}
             label="Ticket Code"
-            defaultValue="XXX-XXX-XXX"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             sx={{width:"60%"}}
@@ -130,8 +129,7 @@ function Ticketing() {
           <FormControl sx={{width:"60%"}}>
             <RadioGroup
               aria-labelledby="wings-choice"
-              defaultValue=""
-              error={submitted && wings === ""}
+              // error={submitted && wings === ""}
               name="wings-choice"
               value={wings}
               onChange={(event) => {setWings(event.target.value)}}
@@ -193,7 +191,6 @@ function Ticketing() {
             error={submitted && sid === ""}
             required
             label="IUSD student ID"
-            defaultValue=""
             value={sid}
             onChange={handleSid}
             sx={{width:"60%"}}
