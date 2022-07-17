@@ -11,7 +11,7 @@ import {
 import * as React from "react";
 import {
   BarChart,
-  // Celebration,
+  LiveHelp,
   Input,
   DarkMode,
   LightMode,
@@ -19,9 +19,9 @@ import {
 } from "@mui/icons-material";
 import Ticketing from "./Ticketing";
 import Stats from "./Stats";
+import Help from "./Help";
 import ReactGA from "react-ga4";
 
-// import Drawing from "./Drawing";
 
 import carrierDark from "./carrier-darkm.png"
 import carrierLight from "./carrier-lightm.png"
@@ -77,7 +77,6 @@ function App() {
 
   const [scrWidth, setScrWidth] = React.useState(window.innerWidth);
   const updateWidth = () => {
-    console.log(window.innerWidth);
     setScrWidth(typeof window !== "undefined" ? window.innerWidth : 0);
   }
 
@@ -130,20 +129,24 @@ function App() {
             textColor="secondary"
             indicatorColor="secondary"
             sx={{
-                  bottom: "0px",
-                }}
+              flexGrow: 1,
+            }}
           >
-            <Tab icon={<Input />} iconPosition="start" label="Submit" />
+            <Tab
+              icon={<Input />}
+              iconPosition="start"
+              label="Submit"
+            />
             <Tab
               icon={<BarChart />}
               iconPosition="start"
               label="Stats"
             />
-            {/*<Tab
-              icon={<Celebration />}
+            <Tab
+              icon={<LiveHelp />}
               iconPosition="start"
-              label="WINGS Drawing"
-            />*/}
+              label="Help"
+            />
           </Tabs>
 
           <Button
@@ -151,8 +154,8 @@ function App() {
             target="_blank"
             rel="noreferrer"
             variant="variant"
-            color="secondary">
-            <Assignment sx={{marginRight: 1}}/>
+            color="secondary"
+            startIcon={<Assignment />}>
             Feedback
           </Button>
 
@@ -162,7 +165,7 @@ function App() {
           </Toolbar>
         </AppBar>
         <Box sx={{width: scrWidth > 750 ? "50%" : "90%", margin: "auto"}}>
-          {tab === 0 ? <Ticketing /> : <Stats />}
+          {tab === 0 ? <Ticketing /> : (tab === 1 ? <Stats /> : <Help />)}
         </Box>
         </Box>
       </React.Fragment>

@@ -119,6 +119,8 @@ function Stats() {
         </Table>
       </TableContainer>
 
+      <Typography variant="h6">This week's homeroom drawing prize is: ICE CREAM SANDWICH!</Typography>
+
       <Typography variant="h6" sx={rowStyle}>
         This trimester's cutoff for TOP 25%: {top} tickets
       </Typography>
