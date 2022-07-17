@@ -5,8 +5,11 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  Paper,
   IconButton,
-  Button
+  Button,
+  BottomNavigation,
+  BottomNavigationAction
 } from "@mui/material";
 import * as React from "react";
 import {
@@ -75,13 +78,13 @@ function App() {
   const [tab, setTab] = React.useState((localTab !== null) ? parseInt(localTab) : 0);
   const [dark, setDark] = React.useState((localDarkSetting !== null) ? localDarkSetting==="true" : browserDarkSetting);
 
-  const [scrWidth, setScrWidth] = React.useState(window.innerWidth);
-  const updateWidth = () => {
-    setScrWidth(typeof window !== "undefined" ? window.innerWidth : 0);
-  }
-
   ReactGA.initialize("G-65F1XKCTRN");
   ReactGA.send("pageview");
+
+  const [mobile, setMobile] = React.useState((typeof window !== "undefined" ? window.innerWidth : 0) < 750 );
+  const updateWidth = () => {
+    setMobile((typeof window !== "undefined" ? window.innerWidth : 0) < 750);
+  }
 
   React.useEffect(()=>{
     window.addEventListener("resize", updateWidth)
@@ -106,48 +109,47 @@ function App() {
   return (
     <ThemeProvider theme={dark ? darkTheme : lightTheme}>
       <CssBaseline />
-      <React.Fragment>
         <Box
           sx={{
             flexGrow: 1,
             bgcolor: "background.paper",
-            height: "100%"
           }}
         >
-        <AppBar position="static">
+        <AppBar position="sticky" >
         <Toolbar variant="dense">
           <img src={dark ? carrierDark : carrierLight} alt="jt-carrier-logo"/>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: 3 }}>
-            JT Carrier
+            {mobile ? "" : "JT Carrier"}
           </Typography>
 
-
-          <Tabs
-            value={tab}
-            onChange={handleTabChange}
-            textColor="secondary"
-            indicatorColor="secondary"
-            sx={{
-              flexGrow: 1,
-            }}
-          >
-            <Tab
-              icon={<Input />}
-              iconPosition="start"
-              label="Submit"
-            />
-            <Tab
-              icon={<BarChart />}
-              iconPosition="start"
-              label="Stats"
-            />
-            <Tab
-              icon={<LiveHelp />}
-              iconPosition="start"
-              label="Help"
-            />
-          </Tabs>
+          {mobile ?
+            <React.Fragment />
+            :
+            <Tabs
+              value={tab}
+              onChange={handleTabChange}
+              textColor="secondary"
+              indicatorColor="secondary"
+              sx={{flexGrow: 1}}
+            >
+              <Tab
+                icon={<Input />}
+                iconPosition="start"
+                label="Submit"
+              />
+              <Tab
+                icon={<BarChart />}
+                iconPosition="start"
+                label="Stats"
+              />
+              <Tab
+                icon={<LiveHelp />}
+                iconPosition="start"
+                label="Help"
+              />
+            </Tabs>
+          }
 
           <Button
             href="https://forms.gle/t9R29o6ZJXDM7NE37"
@@ -156,7 +158,7 @@ function App() {
             variant="variant"
             color="secondary"
             startIcon={<Assignment />}>
-            Feedback
+            {mobile ? "":"feedback"}
           </Button>
 
           <IconButton color="inherit" onClick={handleDark}>
@@ -164,11 +166,33 @@ function App() {
           </IconButton>
           </Toolbar>
         </AppBar>
-        <Box sx={{width: scrWidth > 750 ? "50%" : "90%", margin: "auto"}}>
+
+        {/********************* Body *********************/}
+        <Box sx={{
+          width: mobile ? "90%" : "50%",
+          margin: "auto",
+          marginBottom: mobile ? "80px" : "auto"
+        }}>
           {tab === 0 ? <Ticketing /> : (tab === 1 ? <Stats /> : <Help />)}
         </Box>
+
+        {/************** Bottom Nav for Mobile **************/}
+        {mobile ?
+          <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+            <BottomNavigation
+              showLabels
+              value={tab}
+              onChange={handleTabChange}
+            >
+              <BottomNavigationAction label="Submit" icon={<Input />} />
+              <BottomNavigationAction label="Stats" icon={<BarChart />} />
+              <BottomNavigationAction label="Help" icon={<LiveHelp />} />
+            </BottomNavigation>
+          </Paper>
+          :
+          <React.Fragment />
+        }
         </Box>
-      </React.Fragment>
     </ThemeProvider>
   );
 }
