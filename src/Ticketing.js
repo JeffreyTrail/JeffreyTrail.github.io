@@ -108,7 +108,7 @@ function Ticketing() {
         </Typography>
 
         <Box sx={rowStyle}>
-          <Typography variant="body1" sx={{width:"39%"}}>
+          <Typography variant="body1" sx={promptStyle}>
             What is the 9 digit code at the top of your WINGS ticket?
           </Typography>
           <TextField
@@ -122,7 +122,7 @@ function Ticketing() {
         </Box>
 
         <Box sx={rowStyle}>
-          <Typography variant="body1" sx={{width:"39%"}}>
+          <Typography variant="body1" sx={promptStyle}>
             Which WINGS letter did you demonstrate?
           </Typography>
 
@@ -164,7 +164,7 @@ function Ticketing() {
         </Box>
 
         <Box sx={rowStyle}>
-          <Typography variant="body1" sx={{width:"39%"}}>Who issued you the ticket?</Typography>
+          <Typography variant="body1" sx={promptStyle}>Who issued you the ticket?</Typography>
           <Autocomplete
             id="teacher-select"
             value={teacher}
@@ -186,7 +186,7 @@ function Ticketing() {
         </Box>
 
         <Box sx={rowStyle}>
-          <Typography variant="body1" sx={{width:"39%"}}>What is your IUSD student ID?</Typography>
+          <Typography variant="body1" sx={promptStyle}>What is your IUSD student ID?</Typography>
           <TextField
             error={submitted && sid === ""}
             required
@@ -237,6 +237,11 @@ const rowStyle = {
   display: "flex",
   marginTop: 3,
 };
+
+const promptStyle = {
+  width: "39%",
+  marginRight: 1,
+}
 
 const staff = [
   { label: "ANGEL" },

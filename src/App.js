@@ -45,10 +45,21 @@ const darkTheme =  createTheme({
     secondary: {
       main: '#1452ee',
     }
-  }
+  },
+  typography: {
+    fontFamily: [
+      'Koulen',
+      'cursive',
+    ].join(','),
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  },
 });
 const lightTheme = createTheme({
   palette: {
+    htmlFontSize: 15,
     mode: 'light',
     // primary: {
     //   main: '#1452ee',
@@ -59,7 +70,18 @@ const lightTheme = createTheme({
     secondary: {
       main: '#1452ee',
     }
-  }
+  },
+  typography: {
+    htmlFontSize: 15,
+    fontFamily: [
+      'Koulen',
+      'cursive',
+    ].join(','),
+    fontFamily: [
+      'Open Sans',
+      'sans-serif'
+    ].join(','),
+  },
 });
 
 function App() {
@@ -119,7 +141,11 @@ function App() {
         <Toolbar variant="dense">
           <img src={dark ? carrierDark : carrierLight} alt="jt-carrier-logo"/>
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, marginLeft: 3 }}>
+          <Typography variant="h5" component="div" sx={{
+            flexGrow: 1,
+            marginLeft: 2,
+            fontFamily: "Koulen"
+          }}>
             {mobile ? "" : "JT Carrier"}
           </Typography>
 
