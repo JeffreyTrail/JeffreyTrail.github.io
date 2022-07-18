@@ -23,6 +23,7 @@ function Stats() {
   const [errmsg, setErrmsg] = React.useState("");
   const [beg, setBeg] = React.useState("---");
   const [end, setEnd] = React.useState("---");
+  const [prize, setPrize] = React.useState("---");
 
   const updateStats = () => {
     try {
@@ -48,6 +49,7 @@ function Stats() {
     .then((data) => {
       setBeg(data.beg);
       setEnd(data.end);
+      setPrize(data.prize);
     });
   }, []);
 
@@ -119,7 +121,7 @@ function Stats() {
         </Table>
       </TableContainer>
 
-      <Typography variant="h6">This week's homeroom drawing prize is: ICE CREAM SANDWICH!</Typography>
+      <Typography variant="h6">This week's homeroom drawing prize is: {prize}</Typography>
 
       <Typography variant="h6" sx={rowStyle}>
         This trimester's cutoff for TOP 25%: {top} tickets
