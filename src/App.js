@@ -47,10 +47,7 @@ const darkTheme =  createTheme({
     }
   },
   typography: {
-    fontFamily: [
-      'Koulen',
-      'cursive',
-    ].join(','),
+    htmlFontSize: 15,
     fontFamily: [
       'Open Sans',
       'sans-serif'
@@ -73,10 +70,6 @@ const lightTheme = createTheme({
   },
   typography: {
     htmlFontSize: 15,
-    fontFamily: [
-      'Koulen',
-      'cursive',
-    ].join(','),
     fontFamily: [
       'Open Sans',
       'sans-serif'
