@@ -30,8 +30,8 @@ function Help() {
           <Typography>
             A: There are 3 different ways for you to win:
             <ol>
-            <li>Each week, there is a drawing for each homeroom. The prize is distributed by ASB, and you can see the prize for each week on the Stats tab. </li>
-            <li>Each week, we hold a drawing for each of the WINGS letters for all the tickets submitted that week. This prize is a gift card. Pay close attention during morning announcements. </li>
+            <li>Each week, there is a drawing for each homeroom. The prize is distributed by ASB each week in homeroom.</li>
+            <li>Each week, we hold a drawing for each of the WINGS letters for all tickets submitted in the whole school. Pay close attention during morning announcements. </li>
             <li>This last one is not a drawing. Some WINGS tickets are just special - they're golden tickets, which will reward you immediately after you redeem them.</li>
             </ol>
           </Typography>
@@ -51,6 +51,7 @@ function Help() {
           </Typography>
         </AccordionDetails>
       </Accordion>
+
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -62,6 +63,36 @@ function Help() {
         <AccordionDetails>
           <Typography>
             A: Drawings are conducted every Tuesday! Pay attention to your morning announcements!
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="q3-content"
+          id="q3-header"
+        >
+          <Typography>4. What are the prizes?</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            A: Homeroom drawing prizes change every week; it's listed under the Stats tab. Letter drawing winners get to choose one of many gift cards. Golden ticket winners will have a variety of surprises too.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="q3-content"
+          id="q3-header"
+        >
+          <Typography>5. What do I do with the ticket after?</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            A: Hold onto them! For one thing, they are a memory of your time at JTMS; for another, they might come in handy later on this year...
           </Typography>
         </AccordionDetails>
       </Accordion>

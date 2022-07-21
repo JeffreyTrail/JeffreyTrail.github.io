@@ -44,6 +44,7 @@ function Stats() {
   React.useEffect(() => {
     setInterval(updateStats, 60000);
 
+    updateStats();
     fetch("https://wings-carrier.herokuapp.com/dates/current")
     .then((response) => response.json())
     .then((data) => {
