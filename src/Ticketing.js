@@ -23,8 +23,16 @@ function Ticketing() {
   const [errmsg, setErrmsg] = React.useState("");
 
   const handleSid = (e) => {
-    setSid(e.target.value)
+    setSid(e.target.value);
   };
+
+  const handleCode = (e) => {
+    let newCode = e.target.value;
+    if (newCode.includes("-")){
+      newCode = newCode.replaceAll("-", "");
+    }
+    setCode(newCode);
+  }
 
   const lookup = () => {
     const url =
@@ -109,14 +117,14 @@ function Ticketing() {
 
         <Box sx={rowStyle}>
           <Typography variant="body1" sx={promptStyle}>
-            What is the 9 digit code at the top of your WINGS ticket?
+            What is the 9 digit code at the top of your ticket? (Omit dashes)
           </Typography>
           <TextField
             required
-            error={submitted && code === ""}
+            error={submitted && (code === "" || isNaN(code))}
             label="Ticket Code"
             value={code}
-            onChange={(e) => setCode(e.target.value)}
+            onChange={handleCode}
             sx={{width:"60%"}}
           />
         </Box>
@@ -261,7 +269,7 @@ const staff = [
   { label: "HARRISON" },
   { label: "MELGOZA" },
   { label: "CLAPPER" },
-  { label: "DI FRANCESCO" },
+  { label: "DIFRANCESCO" },
   { label: "FORD" },
   { label: "IGNACIO" },
   { label: "JONG" },
